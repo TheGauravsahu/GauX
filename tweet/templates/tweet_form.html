@@ -1,0 +1,13 @@
+{% extends "layout.html" %} {% block title %} GauX - Create Tweet {% endblock %}
+{% block content %}
+<h2 class="mb-4">
+  {% if form.instance.pl %}Edit Tweet{% else %} Create tweet {% endif %}
+</h2>
+
+<form action='' method="post" enctype="multipart/form-data" class="form">
+    {% csrf_token %} 
+    {{ form.as_p }}
+    <button class="btn btn-warning" type="submit">Submit</button>
+    <a href="{% url 'tweet_list' %}">Back to tweet list</a>
+  </form>
+{% endblock %}

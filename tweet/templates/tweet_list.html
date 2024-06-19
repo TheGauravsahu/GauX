@@ -1,0 +1,36 @@
+{% extends "layout.html" %} {% block title %} GauX - Tweets {% endblock %} 
+{% block content %}
+
+{% if user.is_authenticated %}
+<h1 class="mt-4 text-center">Welcome {{ user.username }}</p></h1>
+{% else %}
+    <h1 class="mt-4 text-center">Welcome Guest to GauX</p></h1>
+{% endif %}
+
+{% if user.is_authenticated %}
+<a href="{% url 'tweet_create' %}" class="btn btn-primary mb-4">Create a tweet</a>
+{% endif %}
+
+<div class="container row gap-3">
+  {% for tweet in tweets %}
+  <div class="card" style="width: 18rem">
+    <img
+      src="{{tweet.photo.url}}"
+      class="card-img-top"
+      alt="{{tweet.user.username}}"
+    />
+    <div class="card-body">
+      <h5 class="card-title">{{tweet.user.username}}</h5>
+      <p class="card-text">{{tweet.text}}</p>
+      {% if user.is_authenticated %}
+      <a href="{% url 'tweet_edit' tweet.id %}" class="btn btn-primary">Edit</a>
+      <a href="{% url 'tweet_delete' tweet.id %}" class="btn btn-danger"
+        >Delete</a
+      >
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}
