@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,HttpResponse
 from .models import Tweet
 from .forms import TweetForm
 from django.shortcuts import get_object_or_404, redirect
@@ -89,18 +89,19 @@ def signup(request):
 
 
 def login_page(request):
-    if request.method == "POST":
-        username = request.POST.get("username")
-        password = request.POST.get("pass1")
-        user = authenticate(username=username, password=password)
-        if user != None:
-            login(request, user)
-            messages.success(request, "Login successful")
-            return redirect("/tweet")
-        else:
-            messages.error(request, "Login unsucessfull")
-            return redirect("/")
-    return render(request, "login.html")
+    # if request.method == "POST":
+    #     username = request.POST.get("username")
+    #     password = request.POST.get("pass1")
+    #     user = authenticate(username=username, password=password)
+    #     if user != None:
+    #         login(request, user)
+    #         messages.success(request, "Login successful")
+    #         return redirect("/tweet")
+    #     else:
+    #         messages.error(request, "Login unsucessfull")
+    #         return redirect("/")
+    # return render(request, "login.html")
+    return HttpResponse("Deploy sucess")
 
 def logout_page(request):
     logout(request)
