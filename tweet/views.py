@@ -89,19 +89,19 @@ def signup(request):
 
 
 def login_page(request):
-    # if request.method == "POST":
-    #     username = request.POST.get("username")
-    #     password = request.POST.get("pass1")
-    #     user = authenticate(username=username, password=password)
-    #     if user != None:
-    #         login(request, user)
-    #         messages.success(request, "Login successful")
-    #         return redirect("/tweet")
-    #     else:
-    #         messages.error(request, "Login unsucessfull")
-    #         return redirect("/")
-    # return render(request, "login.html")
-    return HttpResponse("Deploy sucess")
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("pass1")
+        user = authenticate(username=username, password=password)
+        if user != None:
+            login(request, user)
+            messages.success(request, "Login successful")
+            return redirect("/tweet")
+        else:
+            messages.error(request, "Login unsucessfull")
+            return redirect("/")
+    return render(request, "login.html")
+    
 
 def logout_page(request):
     logout(request)
